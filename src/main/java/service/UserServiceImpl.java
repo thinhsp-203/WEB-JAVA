@@ -2,18 +2,17 @@ package service;
 
 import dao.UserDao;
 import dao.UserDaoImpl;
-import model.User;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import model.User;
 
 public class UserServiceImpl implements UserService {
-    private UserDao userDao = new UserDaoImpl();
+	private final UserDao userDao = new UserDaoImpl();
 
     @Override
     public User login(String username, String password) {
         User user = userDao.get(username);
-        if (user != null) {
-            System.out.println("DB password=" + user.getPassWord() + ", input=" + password);
-        }
         if (user != null && password.trim().equals(user.getPassWord().trim())) {
             return user;
         }
@@ -36,5 +35,19 @@ public class UserServiceImpl implements UserService {
         user.setCreatedDate(new Date());
         userDao.insert(user);
         return true;
+    }
+    
+    @Override
+    public int countUsers(String keyword, Integer roleId) {
+        return userDao.count(keyword, roleId);
+    }
+
+    @Override
+    public List<User> searchUsers(String keyword, Integer roleId, int page, int pageSize) {
+        if (page <= 0 || pageSize <= 0) {
+            return Collections.emptyList();
+        }
+        int offset = (page - 1) * pageSize;
+        return userDao.search(keyword, roleId, offset, pageSize);
     }
 }

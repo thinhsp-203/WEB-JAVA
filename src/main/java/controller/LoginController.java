@@ -27,7 +27,7 @@ public class LoginController extends HttpServlet {
 
         if (user != null) {
             HttpSession session = req.getSession(true);
-            session.setAttribute("account", user);
+            session.setAttribute("currentUser", user);
             resp.sendRedirect(req.getContextPath() + "/home");
         } else {
             req.setAttribute("alert", "Sai tài khoản hoặc mật khẩu");

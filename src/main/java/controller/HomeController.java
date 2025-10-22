@@ -14,7 +14,7 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("account") == null) {
+        if (session == null || session.getAttribute("currentUser") == null) {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }

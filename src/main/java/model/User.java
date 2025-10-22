@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import utils.Roles;
 
 @SuppressWarnings("serial")
 public class User implements Serializable {
@@ -11,7 +12,7 @@ public class User implements Serializable {
     private String fullName;
     private String passWord;
     private String avatar;
-    private int roleid;
+    private int roleId;
     private String phone;
     private Date createdDate;
 
@@ -27,8 +28,11 @@ public class User implements Serializable {
     public void setPassWord(String passWord) { this.passWord = passWord; }
     public String getAvatar() { return avatar; }
     public void setAvatar(String avatar) { this.avatar = avatar; }
-    public int getRoleid() { return roleid; }
-    public void setRoleid(int roleid) { this.roleid = roleid; }
+    public int getRoleId() { return roleId; }
+    public void setRoleId(int roleId) { this.roleId = roleId; }
+    public int getRoleid() { return roleId; }
+    public void setRoleid(int roleId) { this.roleId = roleId; }
+    public String getRoleName() { return Roles.resolve(roleId); }
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
     public Date getCreatedDate() { return createdDate; }
